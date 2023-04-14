@@ -1,15 +1,22 @@
 import express, { Application, json } from "express";
 import { connectDatabase } from "./database";
-import { createMovies, deleteMovie, getMovieByID, getMovies, updateMovie } from "./logic";
+import {
+  createMovies,
+  deleteMovie,
+  getMovieByID,
+  getMovies,
+  updateMovie,
+} from "./logic";
+import { checkID, checkName } from "./middleware";
 
 const app: Application = express();
 app.use(json());
 
-app.post("/movies", createMovies);
+app.post("/movies", checkName, createMovies);
 app.get("/movies", getMovies);
-app.get("/movies/:id", getMovieByID);
-app.patch("/movies/:id", updateMovie);
-app.delete("/movies/:id", deleteMovie);
+app.get("/movies/:id", checkID, getMovieByID);
+app.patch("/movies/:id", checkID, checkName, updateMovie);
+app.delete("/movies/:id", checkID, deleteMovie);
 
 const HOST: string = "localhost";
 const PORT: number = 3000;

@@ -5,7 +5,7 @@ const client = new Client({
   port: 5432,
   database: "movies",
   user: "Pedro",
-  password: "admin",
+  password: "1234",
 });
 
 const connectDatabase = async () => {
