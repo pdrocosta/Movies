@@ -14,7 +14,7 @@ const checkName = async (
   const queryString: string = format(
     `
         SELECT * FROM movies
-        WHERE name = %L;
+        WHERE name = (%L);
         `,
     name
   );
@@ -35,7 +35,7 @@ const checkID = async (
   const queryString: string = format(
     `
         SELECT * FROM movies
-        WHERE id = %L;
+        WHERE id = (%L);
         `,
     Number(id)
   );
