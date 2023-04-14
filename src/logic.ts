@@ -12,7 +12,7 @@ const createMovies = async (
   const queryString: string = format(
     `
         INSERT INTO movies(%I)
-        VALUES %L
+        VALUES (%L)
         RETURNING *;
       `,
     Object.keys(payload),
@@ -46,7 +46,7 @@ const getMovieByID = async (
   const queryString: string = format(
     `
       SELECT * FROM movies
-      WHERE id = %L;
+      WHERE id = (%L);
       `,
     Number(id)
   );
@@ -66,7 +66,7 @@ const deleteMovie = async (
   const queryString = format(
     `
       DELETE FROM movies
-      WHERE id = %L;
+      WHERE id = (%L);
     `,
     Number(id)
   );
@@ -87,7 +87,7 @@ const updateMovie = async (
     `
       UPDATE movies
       SET(%I) = ROW(%L)
-      WHERE id = %L
+      WHERE id = (%L)
       RETURNING *;
       `,
     Object.keys(payload),
